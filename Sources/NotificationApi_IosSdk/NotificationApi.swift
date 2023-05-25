@@ -9,6 +9,7 @@ import Foundation
 
 open class NotificationApi: NSObject {
     internal static let baseUrl = "https://notificationapi.com"
+    internal static let deviceInfo = NotificationApiDeviceInfo()
     
     public static let shared = NotificationApi()
     
@@ -19,5 +20,6 @@ open class NotificationApi: NSObject {
     
     public func uploadApnsToken(_ token: String) async throws {
         print("napi token: \(token)")
+        print("device info: \(NotificationApi.deviceInfo)")
     }
 }
