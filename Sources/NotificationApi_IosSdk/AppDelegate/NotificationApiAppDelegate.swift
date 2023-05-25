@@ -21,10 +21,10 @@ open class NotificationApiAppDelegate: NSObject, UIApplicationDelegate {
                 let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
 
                 notificationApi(apnsTokenDidChange: token)
-
+                
                 try await NotificationApi.shared.uploadApnsToken(token)
             } catch {
-                print("NotificationApi error. \(error.localizedDescription)")
+                print("NotificationApi error. \(error)")
             }
         }
     }
