@@ -11,7 +11,7 @@ import UIKit
 internal struct NotificationApiDeviceInfo: Codable {
 
     let appId: String?
-    let deviceId: UUID?
+    let deviceId: String?
     let model: String
     let platform: String
     let platformVersion: String
@@ -19,7 +19,7 @@ internal struct NotificationApiDeviceInfo: Codable {
     
     internal init() {
         self.appId = Bundle.main.bundleIdentifier
-        self.deviceId = UIDevice.current.identifierForVendor
+        self.deviceId = UIDevice.current.identifierForVendor?.uuidString
         self.model = UIDevice.current.model
         self.platform = UIDevice.current.systemName
         self.platformVersion = UIDevice.current.systemVersion
