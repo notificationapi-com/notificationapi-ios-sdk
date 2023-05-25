@@ -4,10 +4,58 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>NotificationApiIosSdk-Package.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>NotificationApiIosSdk.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>NotificationApi_IosSdk-Package.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>NotificationApi_IosSdk.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+		<key>notificationapi-ios-sdk-Package.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
 		<key>notificationapi-ios-sdk.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>NotificationApi_IosSdk</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>NotificationApi_IosSdkTests</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>notificationapi-ios-sdk</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>notificationapi-ios-sdkTests</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>
