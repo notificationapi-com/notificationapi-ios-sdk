@@ -9,4 +9,7 @@ import Foundation
 
 enum NotificationApiError: Error {
     case missingCredentials(String)
+    case invalidUrl(String)
+    case failedToSerializeDeviceInfo
+    case failedToUploadApnsToken
 }
