@@ -7,22 +7,23 @@
 
 import Foundation
 import UIKit
+import AdSupport
 
 internal struct NotificationApiDeviceInfo: Codable {
 
-    let appId: String?
-    let deviceId: String?
-    let model: String
+    let app_id: String?
+    let ad_id: String?
+    let device_id: String?
     let platform: String
-    let platformVersion: String
     let manufactuer: String
+    let model: String
     
     internal init() {
-        self.appId = Bundle.main.bundleIdentifier
-        self.deviceId = UIDevice.current.identifierForVendor?.uuidString
-        self.model = UIDevice.current.model
+        self.app_id = Bundle.main.bundleIdentifier
+        self.ad_id = ASIdentifierManager.shared().advertisingIdentifier.uuidString
+        self.device_id = UIDevice.current.identifierForVendor?.uuidString
         self.platform = UIDevice.current.systemName
-        self.platformVersion = UIDevice.current.systemVersion
         self.manufactuer = "apple"
+        self.model = UIDevice.current.model
     }
 }
