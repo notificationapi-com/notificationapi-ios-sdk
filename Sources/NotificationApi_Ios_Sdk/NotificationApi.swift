@@ -6,10 +6,13 @@
 //
 
 import Foundation
+import UIKit
 
 open class NotificationApi: NSObject {
     internal static let baseUrl = "https://notificationapi.com"
     internal static let deviceInfo = NotificationApiDeviceInfo()
+    internal static let authOptions: UNAuthorizationOptions = [.badge, .alert, .sound]
+    
     internal var credentials: NotificationApiCredentials?
     
     public static let shared = NotificationApi()
@@ -21,6 +24,14 @@ open class NotificationApi: NSObject {
     
     public func configure(withCredentials credentials: NotificationApiCredentials) {
         self.credentials = credentials
+    }
+    
+    public func requestAuthorization(completionHandler handler: @escaping (Bool, Error?) -> Void) {
+        UNUserNotificationCenter.current().requestAuthorization(options: NotificationApi.authOptions, completionHandler: handler)
+    }
+    
+    public func requestAuthorization() async throws -> Bool {
+        return try await UNUserNotificationCenter.current().requestAuthorization(options: NotificationApi.authOptions)
     }
     
     public func uploadApnsToken(_ token: String) async throws {
@@ -46,7 +57,5 @@ open class NotificationApi: NSObject {
         guard let (data, res) = try? await URLSession.shared.data(for: request) else {
             throw NotificationApiError.failedToUploadApnsToken
         }
-        
-        print("Data: \(String(describing: String(data: data, encoding: .utf8)))")
     }
 }

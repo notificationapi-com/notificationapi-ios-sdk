@@ -8,11 +8,13 @@
 import UIKit
 
 @available(iOSApplicationExtension, unavailable)
-open class NotificationApiAppDelegate: NSObject, UIApplicationDelegate {
+open class NotificationApiAppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     override init() {
         super.init()
         
+        UNUserNotificationCenter.current().delegate = self
         UIApplication.shared.registerForRemoteNotifications()
+        NotificationApi.shared.requestAuthorization { _, _ in }
     }
     
     public func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
@@ -20,7 +22,7 @@ open class NotificationApiAppDelegate: NSObject, UIApplicationDelegate {
             do {
                 let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
 
-                notificationApi(apnsTokenDidChange: token)
+                notificationApi(apnTokenDidChange: token)
                 
                 try await NotificationApi.shared.uploadApnsToken(token)
             } catch {
@@ -33,5 +35,5 @@ open class NotificationApiAppDelegate: NSObject, UIApplicationDelegate {
         print("NotificationAPI error. Failed to register for remote notifications: \(error.localizedDescription)")
     }
     
-    open func notificationApi(apnsTokenDidChange token: String) { }
+    open func notificationApi(apnTokenDidChange token: String) { }
 }
