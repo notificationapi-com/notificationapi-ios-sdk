@@ -9,22 +9,29 @@ import Foundation
 import UIKit
 
 open class NotificationApi: NSObject {
-    internal static let baseUrl = "https://notificationapi.com"
+    public static let shared = NotificationApi()
+    
+    // MARK: - Private members
+
+    internal static let defaultConfig = NotificationApiConfig(baseUrl: "https://notificationapi.com")
     internal static let deviceInfo = NotificationApiDeviceInfo()
     internal static let authOptions: UNAuthorizationOptions = [.badge, .alert, .sound]
     
     internal var credentials: NotificationApiCredentials?
-    
-    public static let shared = NotificationApi()
+    internal var config: NotificationApiConfig?
+        
+    // MARK: - Init & Configuration
     
     private override init() {
         super.init()
-        print("napi init")
     }
     
-    public func configure(withCredentials credentials: NotificationApiCredentials) {
+    public func configure(withCredentials credentials: NotificationApiCredentials, withConfig config: NotificationApiConfig? = nil) {
         self.credentials = credentials
+        self.config = config ?? NotificationApi.defaultConfig
     }
+    
+    // MARK: - Authorization
     
     public func requestAuthorization(completionHandler handler: @escaping (Bool, Error?) -> Void) {
         UNUserNotificationCenter.current().requestAuthorization(options: NotificationApi.authOptions, completionHandler: handler)
@@ -34,12 +41,14 @@ open class NotificationApi: NSObject {
         return try await UNUserNotificationCenter.current().requestAuthorization(options: NotificationApi.authOptions)
     }
     
+    // MARK: - Tokens
+    
     public func uploadApnsToken(_ token: String) async throws {
         guard credentials != nil else {
             throw NotificationApiError.missingCredentials("No credentials found. Did you forget to call NotificationApi.shared.configure()?")
         }
         
-        let url = "\(NotificationApi.baseUrl)/test"
+        let url = "\(config!.baseUrl)/test"
     
         guard let url = URL(string: url) else {
             throw NotificationApiError.invalidUrl(url)
