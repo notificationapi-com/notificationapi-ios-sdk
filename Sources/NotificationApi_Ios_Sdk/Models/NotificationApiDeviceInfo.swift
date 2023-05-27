@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import AdSupport
 
-internal struct NotificationApiDeviceInfo: Codable {
+struct NotificationApiDeviceInfo: Codable {
 
     let app_id: String?
     let ad_id: String?
@@ -18,7 +18,7 @@ internal struct NotificationApiDeviceInfo: Codable {
     let manufactuer: String
     let model: String
     
-    internal init() {
+    init() {
         self.app_id = Bundle.main.bundleIdentifier
         self.ad_id = ASIdentifierManager.shared().advertisingIdentifier.uuidString
         self.device_id = UIDevice.current.identifierForVendor?.uuidString

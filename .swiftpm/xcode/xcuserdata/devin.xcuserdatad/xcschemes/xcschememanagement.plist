@@ -27,12 +27,12 @@
 		<key>NotificationApi_Ios_Sdk.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>2</integer>
 		</dict>
 		<key>NotificationApi_Ios_Sdk_Tests.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<key>notificationapi-ios-sdk-Package.xcscheme_^#shared#^_</key>
 		<dict>

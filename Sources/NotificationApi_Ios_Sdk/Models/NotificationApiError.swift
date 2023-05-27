@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum NotificationApiError: Error {
+public enum NotificationApiError: Error {
     case missingCredentials(String)
     case invalidUrl(String)
     case failedToSerializeDeviceInfo

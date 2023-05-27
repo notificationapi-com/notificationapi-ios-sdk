@@ -8,17 +8,17 @@
 import Foundation
 import UIKit
 
-open class NotificationApi: NSObject {
+public class NotificationApi: NSObject {
     public static let shared = NotificationApi()
     
     // MARK: - Private Members
 
-    internal static let defaultConfig = NotificationApiConfig(baseUrl: "https://notificationapi.com")
-    internal static let deviceInfo = NotificationApiDeviceInfo()
-    internal static let authOptions: UNAuthorizationOptions = [.badge, .alert, .sound]
+    fileprivate static let defaultConfig = NotificationApiConfig(baseUrl: "https://notificationapi.com")
+    fileprivate static let deviceInfo = NotificationApiDeviceInfo()
+    fileprivate static let authOptions: UNAuthorizationOptions = [.badge, .alert, .sound]
     
-    internal var credentials: NotificationApiCredentials?
-    internal var config: NotificationApiConfig?
+    fileprivate var credentials: NotificationApiCredentials?
+    fileprivate var config: NotificationApiConfig?
         
     // MARK: - Init & Configuration
     
