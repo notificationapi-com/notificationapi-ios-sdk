@@ -67,4 +67,10 @@ public class NotificationApi: NSObject {
             throw NotificationApiError.failedToUploadApnsToken
         }
     }
+    
+    // MARK: - Push Notifications
+    
+    public func backgroundNotificationClicked() async throws {
+        // TODO: Determine parameters and implement this
+    }
 }
