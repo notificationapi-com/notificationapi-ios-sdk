@@ -26,11 +26,11 @@ open class NotificationApi: NSObject {
         self.credentials = credentials
     }
     
-    public func requestNotificationAuthorization(completionHandler handler: @escaping (Bool, Error?) -> Void) {
+    public func requestAuthorization(completionHandler handler: @escaping (Bool, Error?) -> Void) {
         UNUserNotificationCenter.current().requestAuthorization(options: NotificationApi.authOptions, completionHandler: handler)
     }
     
-    public func requestNotificationAuthorization() async throws -> Bool {
+    public func requestAuthorization() async throws -> Bool {
         return try await UNUserNotificationCenter.current().requestAuthorization(options: NotificationApi.authOptions)
     }
     
