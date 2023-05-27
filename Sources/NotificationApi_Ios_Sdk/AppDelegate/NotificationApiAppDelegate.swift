@@ -9,12 +9,16 @@ import UIKit
 
 @available(iOSApplicationExtension, unavailable)
 open class NotificationApiAppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+    // MARK: - Init
+    
     override init() {
         super.init()
         
         UNUserNotificationCenter.current().delegate = self
         UIApplication.shared.registerForRemoteNotifications()
     }
+    
+    // MARK: - Delegate Functions
     
     public func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         Task {
@@ -33,6 +37,8 @@ open class NotificationApiAppDelegate: NSObject, UIApplicationDelegate, UNUserNo
     public func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         print("NotificationAPI error. Failed to register for remote notifications: \(error.localizedDescription)")
     }
+    
+    // MARK: - Callback Functions
     
     open func notificationApi(apnTokenDidChange token: String) { }
 }

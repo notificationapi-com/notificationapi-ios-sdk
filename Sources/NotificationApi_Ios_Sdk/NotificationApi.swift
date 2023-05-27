@@ -11,7 +11,7 @@ import UIKit
 open class NotificationApi: NSObject {
     public static let shared = NotificationApi()
     
-    // MARK: - Private members
+    // MARK: - Private Members
 
     internal static let defaultConfig = NotificationApiConfig(baseUrl: "https://notificationapi.com")
     internal static let deviceInfo = NotificationApiDeviceInfo()
