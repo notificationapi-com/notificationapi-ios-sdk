@@ -14,7 +14,6 @@ open class NotificationApiAppDelegate: NSObject, UIApplicationDelegate, UNUserNo
         
         UNUserNotificationCenter.current().delegate = self
         UIApplication.shared.registerForRemoteNotifications()
-        NotificationApi.shared.requestAuthorization { _, _ in }
     }
     
     public func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
