@@ -9,13 +9,13 @@ import Foundation
 
 public struct NotificationApiCredentials {
     
-    let apiKey: String
     let clientId: String
     let userId: String
+    let hashedUserId: String
     
-    public init(apiKey: String, clientId: String, userId: String) {
-        self.apiKey = apiKey
+    public init(clientId: String, userId: String, hashedUserId: String) {
         self.clientId = clientId
         self.userId = userId
+        self.hashedUserId = hashedUserId
     }
 }
