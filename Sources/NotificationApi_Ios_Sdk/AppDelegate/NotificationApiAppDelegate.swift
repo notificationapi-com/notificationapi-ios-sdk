@@ -45,7 +45,7 @@ open class NotificationApiAppDelegate: NSObject, UIApplicationDelegate, UNUserNo
                 
                 notificationApi(didClickOnBackgroundNotification: info)
                 
-                try await NotificationApi.shared.backgroundNotificationClicked()
+                try await NotificationApi.shared.backgroundNotificationClicked(response.notification.request.identifier)
             } catch {
                 print("NotificationApi error. \(error)")
             }
