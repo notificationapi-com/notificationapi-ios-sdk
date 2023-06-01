@@ -23,11 +23,11 @@ open class NotificationApiAppDelegate: NSObject, UIApplicationDelegate, UNUserNo
     public func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         Task {
             do {
-                let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
-
+                let token = deviceToken.toString()
+                
                 notificationApi(apnTokenDidChange: token)
                 
-                try await NotificationApi.shared.uploadApnsToken(token)
+                try await NotificationApi.shared.syncApn(token: token)
             } catch {
                 print("NotificationApi error. \(error)")
             }
