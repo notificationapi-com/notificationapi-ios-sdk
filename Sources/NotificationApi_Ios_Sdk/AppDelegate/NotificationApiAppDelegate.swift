@@ -1,10 +1,3 @@
-//
-//  NotificationApiAppDelegate.swift
-//  
-//
-//  Created by Devin on 2023-05-23.
-//
-
 import UIKit
 
 @available(iOSApplicationExtension, unavailable)
@@ -29,7 +22,7 @@ open class NotificationApiAppDelegate: NSObject, UIApplicationDelegate, UNUserNo
                 
                 try await NotificationApi.shared.syncApn(token: token)
             } catch {
-                print("NotificationApi error. \(error)")
+                print("NotificationApi error: \(error)")
             }
         }
     }
@@ -47,7 +40,7 @@ open class NotificationApiAppDelegate: NSObject, UIApplicationDelegate, UNUserNo
                 
                 try await NotificationApi.shared.backgroundNotificationClicked(response.notification.request.identifier)
             } catch {
-                print("NotificationApi error. \(error)")
+                print("NotificationApi error: \(error)")
             }
         }
     }

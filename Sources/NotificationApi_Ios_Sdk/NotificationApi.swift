@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Devin on 2023-05-25.
-//
-
 import Foundation
 import UIKit
 
@@ -33,6 +26,18 @@ public class NotificationApi: NSObject {
         self.restApi = NotificationApiRest(baseUrl: self.config!.baseUrl, credentials: self.credentials!, deviceInfo: NotificationApi.deviceInfo)
     }
     
+    fileprivate func checkCredentialsAndAuthorization() async throws {
+        guard credentials != nil else {
+            throw NotificationApiError.missingCredentials("No credentials found. Did you forget to call NotificationApi.shared.configure(withCredentials:)?")
+        }
+        
+        let settings = await UNUserNotificationCenter.current().notificationSettings()
+        
+        guard settings.authorizationStatus != UNAuthorizationStatus.notDetermined else {
+            throw NotificationApiError.notificationsUnauthorized("Notifications unauthorized. Did you forget to call NotificationApi.shared.requestAuthorization()?")
+        }
+    }
+    
     // MARK: - Authorization
     
     public func requestAuthorization(completionHandler handler: @escaping (Bool, Error?) -> Void) {
@@ -46,13 +51,7 @@ public class NotificationApi: NSObject {
     // MARK: - Tokens
     
     public func syncApn(token: String) async throws {
-        guard credentials != nil else {
-            throw NotificationApiError.missingCredentials("No credentials found. Did you forget to call NotificationApi.shared.configure()?")
-        }
-        
-        guard restApi != nil else {
-            return
-        }
+        try await checkCredentialsAndAuthorization()
         
         try await restApi!.syncApn(token: token)
     }
@@ -60,13 +59,7 @@ public class NotificationApi: NSObject {
     // MARK: - Push Notifications
     
     public func backgroundNotificationClicked(_ notificationId: String) async throws {
-        guard credentials != nil else {
-            throw NotificationApiError.missingCredentials("No credentials found. Did you forget to call NotificationApi.shared.configure()?")
-        }
-        
-        guard restApi != nil else {
-            return
-        }
+        try await checkCredentialsAndAuthorization()
         
         try await restApi!.trackNotification(id: notificationId, status: "clicked")
     }

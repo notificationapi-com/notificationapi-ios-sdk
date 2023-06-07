@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Devin on 2023-05-31.
-//
-
 import Foundation
 
 extension String {

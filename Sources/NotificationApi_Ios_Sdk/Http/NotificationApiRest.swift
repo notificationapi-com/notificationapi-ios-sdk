@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Devin on 2023-05-27.
-//
-
 import Foundation
 
 class NotificationApiRest {
@@ -34,13 +27,13 @@ class NotificationApiRest {
         }
         
         guard let url = urlComp?.url else {
-            throw NotificationApiError.invalidUrl("")
+            throw NotificationApiHttpError.invalidUrl
         }
         
         let body = SyncApnTokenRequestBody(pushTokens: [PushToken(type: .apn, token: token, device: deviceInfo)])
         
         guard let reqBody = try? JSONEncoder().encode(body) else {
-            throw NotificationApiError.failedToSerializeDeviceInfo
+            throw NotificationApiHttpError.failedToSerializeRequestBody
         }
         
         var request = URLRequest(url: url)
@@ -49,8 +42,16 @@ class NotificationApiRest {
         request.addValue("BASIC \(authToken)", forHTTPHeaderField: "Authorization")
         request.httpBody = reqBody
         
-        guard let (data, res) = try? await URLSession.shared.data(for: request) else {
-            throw NotificationApiError.failedToUploadApnsToken
+        guard let (_, res) = try? await URLSession.shared.data(for: request) else {
+            throw NotificationApiHttpError.failedToSendRequest
+        }
+        
+        guard let response = res as? HTTPURLResponse else {
+            return
+        }
+        
+        guard (200..<300).contains(response.statusCode) else {
+            throw NotificationApiHttpError.badResponseStatus(response.statusCode)
         }
     }
     

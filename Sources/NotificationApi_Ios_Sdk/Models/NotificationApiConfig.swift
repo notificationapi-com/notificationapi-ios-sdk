@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Devin on 2023-05-26.
-//
-
 import Foundation
 
 public struct NotificationApiConfig {
