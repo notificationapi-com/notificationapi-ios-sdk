@@ -50,6 +50,20 @@ public class NotificationApi: NSObject {
     
     // MARK: - Tokens
     
+    public func syncApn(token: String, completionHandler handler: @escaping (Error?) -> Void) {
+        Task {
+            do {
+                try await checkCredentialsAndAuthorization()
+                
+                try await restApi!.syncApn(token: token)
+                
+                handler(nil)
+            } catch {
+                handler(error)
+            }
+        }
+    }
+    
     public func syncApn(token: String) async throws {
         try await checkCredentialsAndAuthorization()
         
@@ -57,6 +71,20 @@ public class NotificationApi: NSObject {
     }
     
     // MARK: - Push Notifications
+    
+    public func backgroundNotificationClicked(_ notificationId: String, completionHandler handler: @escaping (Error?) -> Void) {
+        Task {
+            do {
+                try await checkCredentialsAndAuthorization()
+                
+                try await restApi!.trackNotification(id: notificationId, status: "clicked")
+                
+                handler(nil)
+            } catch {
+                handler(error)
+            }
+        }
+    }
     
     public func backgroundNotificationClicked(_ notificationId: String) async throws {
         try await checkCredentialsAndAuthorization()
