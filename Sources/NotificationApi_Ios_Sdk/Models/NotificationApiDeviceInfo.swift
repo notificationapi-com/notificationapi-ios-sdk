@@ -10,7 +10,7 @@ struct NotificationApiDeviceInfo: Codable {
     let platform: String
     let manufactuer: String
     let model: String
-    
+
     init() {
         self.app_id = Bundle.main.bundleIdentifier
         self.ad_id = ASIdentifierManager.shared().advertisingIdentifier.uuidString
