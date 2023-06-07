@@ -7,9 +7,7 @@ class NotificationApiRest {
     let session = URLSession.shared
 
     var authToken: String {
-        get {
-            return "\(credentials.clientId):\(credentials.userId):\(credentials.hashedUserId ?? "undefined")".toBase64()
-        }
+        return "\(credentials.clientId):\(credentials.userId):\(credentials.hashedUserId ?? "undefined")".toBase64()
     }
 
     init(baseUrl: String, credentials: NotificationApiCredentials, deviceInfo: NotificationApiDeviceInfo) {

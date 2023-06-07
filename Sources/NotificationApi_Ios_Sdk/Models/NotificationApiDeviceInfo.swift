@@ -4,12 +4,14 @@ import AdSupport
 
 struct NotificationApiDeviceInfo: Codable {
 
+    // swiftlint:disable identifier_name
     let app_id: String?
     let ad_id: String?
     let device_id: String?
     let platform: String
     let manufactuer: String
     let model: String
+    // swiftlint:enable identifier_name
 
     init() {
         self.app_id = Bundle.main.bundleIdentifier
