@@ -28,7 +28,7 @@ open class NotificationApiAppDelegate: NSObject, UIApplicationDelegate, UNUserNo
     }
     
     public func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("NotificationAPI error. Failed to register for remote notifications: \(error.localizedDescription)")
+        print("NotificationAPI error: Failed to register for remote notifications: \(error.localizedDescription)")
     }
     
     public func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
