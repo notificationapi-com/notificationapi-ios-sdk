@@ -5,3 +5,7 @@ With [NotificationAPI](https://www.notificationapi.com), software developers can
 # Docs
 
 Please refer to our [documentations](https://docs.notificationapi.com).
+
+# Installation
+
+You can follow Apple's instructions for installing a package dependency [here](https://developer.apple.com/documentation/xcode/adding-package-dependencies-to-your-app).

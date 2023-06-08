@@ -1,13 +1,13 @@
-name: Pull Request
+name: Pull Request Pipeline
 
 on:
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
-  lint:
-    name: Lint
+  pull_request_pipeline:
+    name: Pull Request Pipeline
     runs-on: ubuntu-latest
     container: ghcr.io/realm/swiftlint:latest
     steps:

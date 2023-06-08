@@ -18,7 +18,7 @@ class NotificationApiRest {
 
     func syncApn(token: String) async throws {
         var urlComp = URLComponents(string: baseUrl)
-        urlComp?.path = "/\(credentials.clientId)/users/\(credentials.userId)/"
+        urlComp?.path = "/\(credentials.clientId)/users/\(credentials.userId)"
 
         if let hash = credentials.hashedUserId {
             urlComp?.queryItems = [URLQueryItem(name: "hashedUserId", value: hash)]
