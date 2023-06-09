@@ -4,7 +4,7 @@ With [NotificationAPI](https://www.notificationapi.com), software developers can
 
 # Docs
 
-Please refer to our [documentations](https://docs.notificationapi.com).
+Please refer to our [documentations](https://docs.notificationapi.com/reference/ios-sdk).
 
 # Installation
 
