@@ -5,9 +5,15 @@ class NotificationApiRest {
     let credentials: NotificationApiCredentials
     let deviceInfo: NotificationApiDeviceInfo
     let session = URLSession.shared
+    let agent = "NotificationApi_iOS_SDK"
+    let version = "1.0.0"
 
     var authToken: String {
         return "\(credentials.clientId):\(credentials.userId):\(credentials.hashedUserId ?? "undefined")".toBase64()
+    }
+    
+    var userAgent: String {
+        return "\(agent)/\(version)"
     }
 
     init(baseUrl: String, credentials: NotificationApiCredentials, deviceInfo: NotificationApiDeviceInfo) {
@@ -37,6 +43,7 @@ class NotificationApiRest {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue(userAgent, forHTTPHeaderField: "User-Agent")
         request.addValue("BASIC \(authToken)", forHTTPHeaderField: "Authorization")
         request.httpBody = reqBody
 
