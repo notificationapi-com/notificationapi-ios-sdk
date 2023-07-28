@@ -1,8 +1,8 @@
 import Foundation
 import UIKit
 
-public class NotificationApi: NSObject {
-    public static let shared = NotificationApi()
+@objc public class NotificationApi: NSObject {
+    @objc public static let shared = NotificationApi()
 
     // MARK: - Private Members
 
@@ -20,7 +20,7 @@ public class NotificationApi: NSObject {
         super.init()
     }
 
-    public func configure(withCredentials credentials: NotificationApiCredentials, withConfig config: NotificationApiConfig? = nil) {
+    @objc public func configure(withCredentials credentials: NotificationApiCredentials, withConfig config: NotificationApiConfig? = nil) {
         self.credentials = credentials
         self.config = config ?? NotificationApi.defaultConfig
         self.restApi = NotificationApiRest(baseUrl: self.config!.baseUrl, credentials: self.credentials!, deviceInfo: NotificationApi.deviceInfo)
@@ -40,17 +40,17 @@ public class NotificationApi: NSObject {
 
     // MARK: - Authorization
 
-    public func requestAuthorization(completionHandler handler: @escaping (Bool, Error?) -> Void) {
+    @objc public func requestAuthorization(completionHandler handler: @escaping (Bool, Error?) -> Void) {
         UNUserNotificationCenter.current().requestAuthorization(options: NotificationApi.authOptions, completionHandler: handler)
     }
 
-    public func requestAuthorization() async throws -> Bool {
+    @objc public func requestAuthorization() async throws -> Bool {
         return try await UNUserNotificationCenter.current().requestAuthorization(options: NotificationApi.authOptions)
     }
 
     // MARK: - Tokens
 
-    public func syncApn(token: String, completionHandler handler: @escaping (Error?) -> Void) {
+    @objc public func syncApn(token: String, completionHandler handler: @escaping (Error?) -> Void) {
         Task {
             do {
                 try await checkCredentialsAndAuthorization()
@@ -64,7 +64,7 @@ public class NotificationApi: NSObject {
         }
     }
 
-    public func syncApn(token: String) async throws {
+    @objc public func syncApn(token: String) async throws {
         try await checkCredentialsAndAuthorization()
 
         try await restApi!.syncApn(token: token)
@@ -72,7 +72,7 @@ public class NotificationApi: NSObject {
 
     // MARK: - Push Notifications
 
-    public func backgroundNotificationClicked(_ notificationId: String, completionHandler handler: @escaping (Error?) -> Void) {
+    @objc public func backgroundNotificationClicked(_ notificationId: String, completionHandler handler: @escaping (Error?) -> Void) {
         Task {
             do {
                 try await checkCredentialsAndAuthorization()
@@ -86,7 +86,7 @@ public class NotificationApi: NSObject {
         }
     }
 
-    public func backgroundNotificationClicked(_ notificationId: String) async throws {
+    @objc public func backgroundNotificationClicked(_ notificationId: String) async throws {
         try await checkCredentialsAndAuthorization()
 
         try await restApi!.trackNotification(id: notificationId, status: "clicked")
