@@ -1,10 +1,10 @@
 import Foundation
 
-public struct NotificationApiConfig {
+@objc public class NotificationApiConfig: NSObject {
 
     public let baseUrl: String
 
-    public init(baseUrl: String) {
+    @objc public init(baseUrl: String) {
         self.baseUrl = baseUrl
     }
 }
