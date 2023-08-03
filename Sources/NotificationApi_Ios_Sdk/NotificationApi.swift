@@ -19,7 +19,7 @@ import UIKit
     private override init() {
         super.init()
     }
-
+    
     @objc public func configure(withCredentials credentials: NotificationApiCredentials, withConfig config: NotificationApiConfig? = nil) {
         self.credentials = credentials
         self.config = config ?? NotificationApi.defaultConfig
@@ -44,7 +44,7 @@ import UIKit
         UNUserNotificationCenter.current().requestAuthorization(options: NotificationApi.authOptions, completionHandler: handler)
     }
 
-    @objc public func requestAuthorization() async throws -> Bool {
+    public func requestAuthorization() async throws -> Bool {
         return try await UNUserNotificationCenter.current().requestAuthorization(options: NotificationApi.authOptions)
     }
 
@@ -64,7 +64,7 @@ import UIKit
         }
     }
 
-    @objc public func syncApn(token: String) async throws {
+    public func syncApn(token: String) async throws {
         try await checkCredentialsAndAuthorization()
 
         try await restApi!.syncApn(token: token)
@@ -86,7 +86,7 @@ import UIKit
         }
     }
 
-    @objc public func backgroundNotificationClicked(_ notificationId: String) async throws {
+    public func backgroundNotificationClicked(_ notificationId: String) async throws {
         try await checkCredentialsAndAuthorization()
 
         try await restApi!.trackNotification(id: notificationId, status: "clicked")
